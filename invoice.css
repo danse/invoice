@@ -1,0 +1,70 @@
+body {
+    font-family: 'Noto Sans', sans-serif;
+    font-size: 10pt;
+}
+
+#contact {
+    float: right;
+}
+
+#reference {
+    text-align: right;
+}
+
+#total {
+    float: right;
+}
+
+#project-total {
+    float: right;
+    padding: 10px;
+}
+
+.clearer {
+    clear: both;
+}
+
+@media print {
+    footer {
+        position: fixed;
+        bottom: 0;
+    }
+}
+
+table {
+    border-spacing: 0;
+}
+
+td {
+    padding: 5px 7px 0;
+}
+
+table.weeks th {
+    vertical-align: top;
+    border-bottom: 1px solid;
+    padding: 7px 7px 10px;
+}
+
+table.weeks td {
+    padding-top: 13px;
+}
+
+table.weeks td.interval {
+    white-space: nowrap;
+}
+
+table.weeks td.centered {
+    text-align: center;
+    vertical-align: middle;
+}
+
+.project {
+    border: 3px solid gray;
+    margin: 5px 0;
+    padding: 5px;
+}
+
+/* reduce the margin for a most compact layout */
+h3 {
+    margin: 5px;
+}
