@@ -39,6 +39,10 @@ td {
     padding: 5px 7px 0;
 }
 
+table.weeks {
+    width: 100%;
+}
+
 table.weeks th {
     vertical-align: top;
     border-bottom: 1px solid;
