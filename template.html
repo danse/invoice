@@ -29,6 +29,9 @@
                 Num: #{{reference}}
             </div>
             <div>
+                Interval: {{interval}}
+            </div>
+            <div>
               {{date}}
             </div>
         </div>
@@ -71,9 +74,6 @@
                 <thead>
                     <tr>
                         <th>
-                            INTERVAL
-                        </th>
-                        <th>
                             DESCRIPTION
                         </th>
                         <th>
@@ -84,9 +84,6 @@
                 <tbody>
                   {{#table.weeks}}
                     <tr>
-                        <td class="centered interval">
-                          {{interval}}
-                        </td>
                         <td>
                           {{description}}
                         </td>

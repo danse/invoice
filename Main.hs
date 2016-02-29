@@ -19,7 +19,6 @@ import System.Locale
 import Data.Time.Format
 
 data Week = Week {
-  interval :: String,
   description :: String,
   hours :: Float
   } deriving (Data, Typeable, Generic)
@@ -42,7 +41,8 @@ data Content = Content {
   contact :: [Line],
   client :: [Line],
   contactBank :: [Line],
-  reference :: Integer
+  reference :: Integer,
+  interval :: String
   } deriving (Data, Typeable, Generic)
 
 instance FromJSON Content

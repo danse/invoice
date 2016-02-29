@@ -53,10 +53,6 @@ table.weeks td {
     padding-top: 13px;
 }
 
-table.weeks td.interval {
-    white-space: nowrap;
-}
-
 table.weeks td.centered {
     text-align: center;
     vertical-align: middle;
