@@ -67,7 +67,7 @@ data Calculated = Calculated {
   transformedTables :: [TransformedTable],
   totalHours :: Float,
   totalEuros :: Float,
-  date :: UTCTime
+  date :: String
   } deriving (Data, Typeable, Generic)
 
 instance FromJSON Calculated
@@ -96,7 +96,7 @@ transform content time = composeCtx contentCtx calculatedCtx
           transformedTables = map transformTable $ tables content,
           totalHours = sumAllHours content,
           totalEuros = sumAllEuros content,
-          date = time
+          date = (formatTime Data.Time.Format.defaultTimeLocale "%B %e, %Y" time)
           }
 
 render = hastacheFileBuilder defaultConfig "template.html"
