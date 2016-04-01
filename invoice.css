@@ -68,3 +68,7 @@ table.weeks td.centered {
 h3 {
     margin: 5px;
 }
+
+.description {
+    width: 100%
+}
