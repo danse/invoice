@@ -1,89 +1,92 @@
 <!DOCTYPE HTML>
 <html>
-    <head>
-        <title>
-            Invoice
-        </title>
-        <link
-           href="http://fonts.googleapis.com/css?family=Noto+Sans:400,700,400italic,700italic&amp;subset=latin,latin-ext"
-           rel="stylesheet">
-        <link href="invoice.css" rel="stylesheet">
-    </head>
-    <body>
-        <div id="contact">
-          {{#contact}}
-            <div>
-              {{line}}
-            </div>
-            {{/contact}}
-        </div>
-        <div>
-          {{#client}}
-            <div>
-              {{line}}
-            </div>
-          {{/client}}
-        </div>
-        <div id="reference">
-            <div>
-                Num: #{{reference}}
-            </div>
-            <div>
-                Interval: {{interval}}
-            </div>
-            <div>
-              Created on: {{date}}
-            </div>
-        </div>
-        <div>
-            <p>
-                
-            </p>
-            <p>
-                Ort der sonstigen Leistung im Drittland (USA) gem. &sect; 3a Abs. 2 Satz 1 UStG.
-            </p>
-            <p>
-              {{dollarsPerHour}}$ = 
-              {{eurosPerHour}}
-                &euro;
-            </p>
-        </div>
-        {{#transformedTables}}
-        <div class="project">
-            <!--table id="project-total">
-                <tbody>
-                    <tr>
-                        <td>
-                            Total hours for this project:
-                        </td>
-                        <td>
-                        </td>
-                        <td>
-                          {{total}}
-                        </td>
-                    </tr>
-                </tbody>
+  <head>
+    <meta charset="utf-8">
+    <title>
+      Invoice
+    </title>
+    <link
+       href="http://fonts.googleapis.com/css?family=Noto+Sans:400,700,400italic,700italic&amp;subset=latin,latin-ext"
+       rel="stylesheet">
+    <link href="invoice.css" rel="stylesheet">
+  </head>
+  <body>
+    <div id="contact">
+      {{#contact}}
+      <div>
+        {{line}}
+      </div>
+      {{/contact}}
+    </div>
+    <div id="reference">
+      <div>
+        Invoice number / Fattura numero:
+        <span class="highlight">
+          {{reference}}
+        </span>
+      </div>
+      <div>
+        Created on / Compilata il:
+        <span class="highlight">
+          {{date}}
+        </span>
+      </div>
+      <div>
+        Interval / Relativa a: {{interval}}
+      </div>
+    </div>
+    <div class="variation">
+      {{#client}}
+      <div>
+        {{line}}
+      </div>
+      {{/client}}
+    </div>
+    <p>
+      The hourly rate is ${{dollarsPerHourExcludedTaxes}}
+      (${{dollarsPerHour}} - 4%), converted to
+      {{eurosPerHour}}&euro;. The 4% is detracted because of Italian
+      taxes paid by the contractor.
+    </p>
+    {{#transformedTables}}
+    <div class="project">
+      <!--table id="project-total">
+          <tbody>
+            <tr>
+              <td>
+                Total hours for this project / Totale ore:
+              </td>
+              <td>
+              </td>
+              <td>
+                {{total}}
+              </td>
+            </tr>
+          </tbody>
             </table-->
             <h3>
               {{table.project}}
             </h3>
-            <div class="clearer">
-                
-            </div>
             <table class="weeks">
                 <thead>
                     <tr>
                         <th>
-                            DESCRIPTION
+                          PROJECT
                         </th>
                         <th>
-                            HOURS
+                          SUMMARY
+                        </th>
+                        <th>
+                          HOURS
                         </th>
                     </tr>
                 </thead>
                 <tbody>
                   {{#table.weeks}}
                     <tr>
+                        <td class="project-row">
+                          {{weekProject}}
+                        </td>
                         <td class="description">
                           {{description}}
                         </td>
@@ -94,62 +97,72 @@
                   {{/table.weeks}}
                 </tbody>
             </table>
+            <div class="laws">
+              <p>
+                Operazione non imponibile ai sensi dell'art. 8 del
+                D.P.R. n°633/1972
+              </p>
+            </div>
         </div>
         {{/transformedTables}}
-        <table id="total">
+        <table class="variation sums">
             <tbody>
-                <tr>
-                    <td>
-                        Total Hours
-                    </td>
-                    <td>
-                        
-                    </td>
-                    <td>
-                      {{totalHours}}
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        Subtotal
-                    </td>
-                    <td>
-                        
-                    </td>
-                    <td>
-                        &euro; 
-                        {{totalEuros}}
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        VAT
-                    </td>
-                    <td>
-                        0%
-                    </td>
-                    <td>
-                        &euro; 0.00
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        Total
-                    </td>
-                    <td>
-                        
-                    </td>
-                    <td>
-                        &euro; 
-                        {{totalEuros}}
-                    </td>
-                </tr>
+              <tr>
+                <td>
+                  Total hours / Totale ore
+                </td>
+                <td>
+                  
+                </td>
+                <td>
+                  {{totalHours}}
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  Before taxes / Imponibile
+                </td>
+                <td>
+                </td>
+                <td>
+                  {{beforeTaxes}} &euro;
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  Tax paid by the contractor / Contributo previdenziale
+                </td>
+                <td>
+                  4%
+                </td>
+                <td>
+                  {{contributoPrevidenziale}} &euro;
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  Total to pay / Totale fattura
+                <td>
+                </td>
+                <td>
+                  {{totalEuros}} &euro; 
+                </td>
+              </tr>
             </tbody>
         </table>
-        <div class="clearer">
-            
+        <div class="laws">
+          <p>
+            Operazione non soggetta ad IVA, effettuata ai sensi
+            dell'art. 1 commi da 54 a 89 della Legge n°190 del 29
+            dicembre 2014.
+          </p>
+          <p>
+            Prestazione non soggetta a ritenuta d'acconto ai sensi
+            del comma 67 art. 1 della Legge n°190 del 29 dicembre
+            2014.
+          </p>
         </div>
-        <footer>
+        <footer class="variation">
           {{#contactBank}}
             <div>
               {{line}}

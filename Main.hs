@@ -19,6 +19,7 @@ import System.Locale
 import Data.Time.Format
 
 data Week = Week {
+  weekProject :: String,
   description :: String,
   hours :: Float
   } deriving (Data, Typeable, Generic)
@@ -37,11 +38,12 @@ instance ToJSON Table
 data Content = Content {
   tables :: [Table],
   dollarsPerHour :: Float,
+  dollarsPerHourExcludedTaxes :: Float,
   eurosPerHour :: Float,
   contact :: [Line],
   client :: [Line],
   contactBank :: [Line],
-  reference :: Integer,
+  reference :: String,
   interval :: String
   } deriving (Data, Typeable, Generic)
 
@@ -67,7 +69,9 @@ data Calculated = Calculated {
   transformedTables :: [TransformedTable],
   totalHours :: Float,
   totalEuros :: Float,
-  date :: String
+  date :: String,
+  contributoPrevidenziale :: Float,
+  beforeTaxes :: Float
   } deriving (Data, Typeable, Generic)
 
 instance FromJSON Calculated
@@ -92,11 +96,16 @@ transformTable table = TransformedTable {
 transform content time = composeCtx contentCtx calculatedCtx
   where contentCtx = mkGenericContext content
         calculatedCtx = mkGenericContext calculated
+        beforeTaxes = sumAllEuros content
+        contributoPrevidenziale = 0.04 * beforeTaxes
+        totalEuros = beforeTaxes + contributoPrevidenziale
         calculated = Calculated {
           transformedTables = map transformTable $ tables content,
           totalHours = sumAllHours content,
-          totalEuros = sumAllEuros content,
-          date = (formatTime Data.Time.Format.defaultTimeLocale "%B %e, %Y" time)
+          beforeTaxes = beforeTaxes,
+          totalEuros = totalEuros,
+          date = (formatTime Data.Time.Format.defaultTimeLocale "%B %e, %Y" time),
+          contributoPrevidenziale = contributoPrevidenziale
           }
 
 render = hastacheFileBuilder defaultConfig "template.html"

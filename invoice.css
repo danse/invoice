@@ -1,42 +1,52 @@
 body {
     font-family: 'Noto Sans', sans-serif;
     font-size: 10pt;
+    display: flex;
+    flex-direction: column;
+    padding: 10pt;
+}
+
+p {
+    margin: 1pt;
+}
+
+.highlight {
+    font-weight: bold;
 }
 
 #contact {
-    float: right;
+    padding: 5pt;
 }
 
 #reference {
-    text-align: right;
+    display: inline-table;
+    border: 1px solid black;
+    padding: 5pt;
 }
 
-#total {
-    float: right;
+.variation {
+    align-self: flex-end;
+    margin: 10pt 0;
+}
+
+.laws {
+    font-size: 8pt;
+    margin-top: 5pt;
 }
 
 #project-total {
-    float: right;
     padding: 10px;
 }
 
-.clearer {
-    clear: both;
-}
-
-@media print {
-    footer {
-        position: fixed;
-        bottom: 0;
-    }
-}
 
 table {
     border-spacing: 0;
 }
 
-td {
-    padding: 5px 7px 0;
+.project-row {
+    white-space: nowrap;
+    padding: 0 5pt;
+    font-weight: bold;
 }
 
 table.weeks {
@@ -46,16 +56,16 @@ table.weeks {
 table.weeks th {
     vertical-align: top;
     border-bottom: 1px solid;
-    padding: 7px 7px 10px;
-}
-
-table.weeks td {
-    padding-top: 13px;
+    white-space: nowrap;
 }
 
 table.weeks td.centered {
     text-align: center;
     vertical-align: middle;
+}
+
+table.sums td {
+    padding: 0 5pt;
 }
 
 .project {
@@ -71,4 +81,11 @@ h3 {
 
 .description {
     width: 100%
+}
+
+@media print {
+    footer {
+        position: fixed;
+        bottom: 0;
+    }
 }
