@@ -44,7 +44,7 @@ table {
 }
 
 .project-row {
-    white-space: nowrap;
+    min-width: 50%;
     padding: 0 5pt;
     font-weight: bold;
 }
