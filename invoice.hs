@@ -68,7 +68,7 @@ instance ToJSON TransformedTable
 data Calculated = Calculated {
   transformedTables :: [TransformedTable],
   totalHours :: Float,
-  totalEuros :: Float,
+  totalEuros :: Integer,
   date :: String,
   contributoPrevidenziale :: Float,
   beforeTaxes :: Float
@@ -98,7 +98,7 @@ transform content time = composeCtx contentCtx calculatedCtx
         calculatedCtx = mkGenericContext calculated
         beforeTaxes = sumAllEuros content
         contributoPrevidenziale = 0.04 * beforeTaxes
-        totalEuros = beforeTaxes + contributoPrevidenziale
+        totalEuros = round (beforeTaxes + contributoPrevidenziale)
         calculated = Calculated {
           transformedTables = map transformTable $ tables content,
           totalHours = sumAllHours content,
